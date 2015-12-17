@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -e
+set -o pipefail
+
+KEY_FILE="$1"
+CERT_FILE="$2"
+CHAIN_FILE="$3"
+
+for service in "nginx" "mail" "dovecot" "prosody" ; do
+	ln -f "$KEY_FILE"   "/etc/$service/tls/$(basename "$KEY_FILE" .pem)-key.pem"
+	ln -f "$CHAIN_FILE" "/etc/$service/tls/$(basename "$CHAIN_FILE" .pem)-chain.pem"
+done
+
+## Dovecot reads certs on start as root
+## Exim and nginx seem to need a restart (reading user?)
+## Prosody can be reloaded (prosody user?)
+systemctl reload nginx
+systemctl restart dovecot
+systemctl restart exim
+prosodyctl reload

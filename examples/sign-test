@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -e
+set -o pipefail
+
+CSR_FILE="$1"
+CERT_FILE="$2"
+CHAIN_FILE="$3"
+
+date >"$CERT_FILE"
+date >"$CHAIN_FILE"

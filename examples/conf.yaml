@@ -1,0 +1,74 @@
+certDefaults:
+    name:
+    signScript:
+    rolloverScript:
+    type:
+    extraConf:
+    keyDir:
+    csrDir:
+    certDir:
+    chainDir:
+
+domainDefaults:
+    name: ## A domain name
+
+zoneDefaults:
+    name:   ## Zone name on the DNS Server e.g. 'example.com'
+    server: ## DNS Server to receive updates (default 'localhost')
+    port:   ## DNS Server port (default 53)
+    keyFile: ## nsupdate -k (default is unset)
+
+recordDefaults:
+    port:     ## 'wildcard' or a port number
+    ttl:      ## TTL for the TLSA record (default: 3600)
+    usage:    ## 'PKIX_TA', 'PKIX_EE', 'DANE_TA' or 'DANE_EE' (default: 'DANE_EE')
+    selector: ## 'FULL' or 'SPKI' (default: 'SPKI')
+    type:     ## 'EXACT', 'SHA256' or 'SHA512' (default: 'SHA256')
+
+## Fallback lists
+defaultDomains:
+defaultZones:
+defaultRecords:
+
+## Here we go a level deeper
+certs:
+  - name: web-rsa
+    
+    ## Here we could overwrite or extend the ..Defaults, for the parent level.
+    ## The new default setting will only be applied to objects in the containing
+    ## cert.
+    domainDefaults:
+    zoneDefaults:
+    recordDefaults:
+    
+    ## Here we could overwrite the default.. lists. The new fallback lists will
+    ## only be used in containing cert.
+    defaultZones:
+    defaultRecords:
+    
+    ## Here we go a level deeper
+    domains: &web-domains
+      - name: example.com
+        zoneDefaults:
+        recordDefaults:
+        
+        defaultRecords:
+        
+        zones:
+          - name: example.com
+            recordDefaults:
+            
+            records:
+              - port: *
+      
+      - name: www.example.com
+        zones:
+          - name: example.com
+            records:
+              - port: 443
+              - port: 8080
+  
+  - name: web-ecc
+    ## Instead of (or in addition to) defaut.. Parameters, you could also use
+    ## yaml's reference feature.
+    domains: *web-domains
