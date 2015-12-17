@@ -47,7 +47,7 @@ class Sir:
 			},
 			'rollover': {
 				'fn'  : self.__stepRollover,
-				'dsc' : 'Call your rollover scripts to install the new certs',
+				'dsc' : 'Call your roll-over scripts to install the new certs',
 			},
 			'updatetlsa': {
 				'fn'  : self.__stepUpdateTlsa,
@@ -157,7 +157,7 @@ class Sir:
 		parser = argparse.ArgumentParser(
 			formatter_class=argparse.RawDescriptionHelpFormatter,
 			description='''
-I will help you to do automated TLS certificate rollovers, including TLSA updates.
+I will help you to do automated TLS certificate roll-overs, including TLSA updates.
  - Sir Tificate
          ___________
         |           |
@@ -189,7 +189,7 @@ The steps:
 		parser.add_argument(
 			'-c', '--config',
 			help    = 'config file',
-			default = '/etc/sir.yaml',
+			default = '/etc/sir/conf.yaml',
 		)
 		
 		parser.add_argument(
