@@ -1,0 +1,9 @@
+## Put this file in /etc/cron.d to update your certificates every two month.
+## The update is done at 13:00, so you should be awake, in case something goes
+## wrong.
+## Here you can append the path to the sir repo:
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+
+# mm  hh  DD  MM   W  user  cmd
+  00  14  01  */2  *  root  /path/to/repo/examples/cron-phase1
+  00  14  02  */2  *  root  /path/to/repo/examples/cron-phase2
