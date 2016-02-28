@@ -1,0 +1,9 @@
+#!/bin/bash
+
+## Script for Phase 2
+set -e
+
+## If you don't need the cert specific roll-over scripts and/or don't trust a
+## Sir, you can also call your roll-over scripts directly and use globs.
+sir.py rollover
+sudo -u sirns sir.py updatetlsa

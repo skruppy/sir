@@ -1,0 +1,8 @@
+#!/bin/bash
+
+## Script for Phase 1
+set -e
+
+sudo -u sirpriv sir.py key
+sudo -u sirpub  sir.py cert
+sudo -u sirns   sir.py addtlsa
