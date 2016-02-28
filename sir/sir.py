@@ -211,7 +211,6 @@ The steps:
 			logLevel = logging.DEBUG
 		
 		logging.basicConfig(level = logLevel)
-		return
 		
 		## Read config
 		sir.config.ConfigParser(args.config, self.__certs, self.__domains, self.__zones)
