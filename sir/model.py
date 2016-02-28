@@ -198,6 +198,9 @@ class Cert:
 		if not self.__domains:
 			return
 		
+		sir.util.rmFile(self.keyFile)
+		sir.util.rmFile(self.csrFile)
+		
 		args = [
 			'openssl', 'req',
 			'-batch',               ## Don't ask anything
@@ -205,7 +208,7 @@ class Cert:
 			'-nodes',               ## Don't encrypt key (TODO needed for batch?)
 			'-newkey', self.__type,
 			'-keyout', self.keyFile,
-			'-out', self.csrFile
+			'-out',    self.csrFile
 		]
 		
 		if(len(self.__domains) > 1):

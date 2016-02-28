@@ -20,13 +20,20 @@ import itertools
 import logging
 import shlex
 import subprocess
-
+import os
+import contextlib
 
 
 
 def readFile(filename):
 	with open(filename) as f:
 		return f.read()
+
+
+
+def rmFile(filename):
+	with contextlib.suppress(FileNotFoundError):
+		os.remove(filename)
 
 
 
