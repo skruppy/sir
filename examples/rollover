@@ -7,15 +7,19 @@ KEY_FILE="$1"
 CERT_FILE="$2"
 CHAIN_FILE="$3"
 
+## Assure
+## 1) /etc/*/tls directories are not world accessable
+## 2) /etc/*/tls directories can be accessed by the process
+## 3) Don't modify permissions for files in /etc/*/tls (affects everyone)
 for service in "nginx" "mail" "dovecot" "prosody" ; do
 	ln -f "$KEY_FILE"   "/etc/$service/tls/$(basename "$KEY_FILE" .pem)-key.pem"
 	ln -f "$CHAIN_FILE" "/etc/$service/tls/$(basename "$CHAIN_FILE" .pem)-chain.pem"
 done
 
 ## Dovecot reads certs on start as root
-## Exim and nginx seem to need a restart (reading user?)
+## Exim reads certs on each connect as exim user
+## Nginx seem to need a restart (reading user?)
 ## Prosody can be reloaded (prosody user?)
 systemctl reload nginx
 systemctl restart dovecot
-systemctl restart exim
 prosodyctl reload

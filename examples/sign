@@ -7,6 +7,10 @@ CSR_FILE="$1"
 CERT_FILE="$2"
 CHAIN_FILE="$3"
 
+## Remove old output before creating a new one to prevent instant rollovers due
+## to hard linked files
+rm -f "$CERT_FILE" "$CHAIN_FILE"
+
 ## Get cert
 acme_tiny \
 	--account-key /etc/acme_tiny/account.key \
