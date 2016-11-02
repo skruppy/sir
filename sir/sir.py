@@ -204,13 +204,11 @@ The steps:
 		
 		## Setup logging
 		if args.verbose == 0:
-			logLevel = logging.WARN
+			logging.root.level = logging.WARN
 		elif args.verbose == 1:
-			logLevel = logging.INFO
-		elif args.verbose == 2:
-			logLevel = logging.DEBUG
-		
-		logging.basicConfig(level = logLevel)
+			logging.root.level = logging.INFO
+		elif args.verbose >= 2:
+			logging.root.level = logging.DEBUG
 		
 		## Read config
 		sir.config.ConfigParser(args.config, self.__certs, self.__domains, self.__zones)
