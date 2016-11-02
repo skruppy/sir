@@ -65,8 +65,11 @@ chmod -r o-rwx /var/lib/sir/keys
 
 Now you can create a config in `/etc/sir/conf.yaml` and add some sign and roll-over scripts in `/etc/sir/`.
 
+There exists also a [Gentoo](https://www.gentoo.org/) [ebuild](https://github.com/lorem-ipsum/ebuilds/blob/master/net-misc/sir/sir-9999.ebuild).
+
 Using cron
 ----------
+[cron-phase1](https://github.com/Skrupellos/sir/blob/master/examples/cron-phase1)
 ```bash
 ## Script for Phase 1
 set -e
@@ -75,7 +78,7 @@ sudo -u sirpriv sir.py key
 sudo -u sirpub  sir.py cert
 sudo -u sirns   sir.py addtlsa
 ```
-
+[cron-phase2](https://github.com/Skrupellos/sir/blob/master/examples/cron-phase2)
 ```bash
 ## Script for Phase 2
 set -e
