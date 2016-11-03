@@ -249,7 +249,7 @@ class ConfigParser:
 		pass
 		
 		## Do domething
-		logging.debug('New record from config:\ncert: %s\ndomain: %s\nzone: %s\n record: %s', pprint.pprint(c.cert), pprint.pprint(c.domain), pprint.pprint(c.zone), pprint.pprint(c.record))
+		logging.debug('New record from config:\ncert: %s\ndomain: %s\nzone: %s\n record: %s', pprint.pformat(c.cert), pprint.pformat(c.domain), pprint.pformat(c.zone), pprint.pformat(c.record))
 		
 		zone = self.__zones.get(**c.zone)
 		zoneDomain = zone.getZoneDomainOfDomain(self.__domains.get(c.domain['name']))

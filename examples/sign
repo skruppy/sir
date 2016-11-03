@@ -13,6 +13,7 @@ rm -f "$CERT_FILE" "$CHAIN_FILE"
 
 ## Get cert
 acme_tiny \
+	--quiet \
 	--account-key /etc/acme_tiny/account.key \
 	--csr "$CSR_FILE" \
 	--acme-dir /srv/http/letsencrypt/ >"$CERT_FILE"
